@@ -1,17 +1,44 @@
-package org.example.core;
 
-import java.sql.*;
 
-public class TestDeConnection {
+public class TestDeConnectionCommented {
     public static void main(String... args) {
         Connection conn = null;
         try {
 
+//  This code snippet demonstrates the configuration of a data source for connecting to a MySQL database.
+
+            // Initializes a BasicDataSource object, which is a commonly used implementation of the DataSource interface in Java.
+            BasicDataSource dataSource = new BasicDataSource();
+
+            // Sets the initial size of the connection pool to 5. This means that when the data source is created, it will create and maintain 5 connections to the database.
+            dataSource.setInitialSize(5);
+//            MysqlDataSource dataSource = new MysqlDataSource();
+
+            // The third line sets the URL of the MySQL database to connect to.
+            // The fourth line sets the username for authenticating with the database.
+            // The fifth line sets the password for authenticating with the database.
+            dataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris");
+            dataSource.setUsername("root");
+            dataSource.setPassword("root");
+
+//            Recrée l'url en valorisant chacun de ses paramètres
+
+//            {
+//                dataSource.setServerName("localhost");
+//                dataSource.setPort(3306);
+//                dataSource.setDatabaseName("tennis");
+//                dataSource.setUseSSL(false);
+//                dataSource.setServerTimezone("Europe/Paris");
+//                dataSource.setUser("root");
+//                dataSource.setPassword("root");
+//            }
+
+            conn = dataSource.getConnection();
             //MySQL driver MySQL Connector
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris", "root", "root");
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Europe/Paris", "root", "root");
             conn.setAutoCommit(false);
 
-//            SELECT
+//            #SELECT
 //            PreparedStatement preparedStatement = conn.prepareStatement("SELECT NOM, PRENOM, ID, SEXE FROM JOUEUR WHERE ID=?");
 //            long identifiant = 32L;
 //            preparedStatement.setLong(1,identifiant );
